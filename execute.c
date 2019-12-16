@@ -47,7 +47,6 @@ void split_redirects(int num_args, char ** command, int * positions){
   }
 }
 void execute_with_redirects(char ** command, int new_fd, int old_fd){
-  //Replaces old_fd with new_fd ! Then executes
   int backup  = dup(old_fd);
   dup2(new_fd, old_fd);
   execute(command);
@@ -84,6 +83,7 @@ void execute_redirects(char ** command){
       }else if(positions[pos] == 4){ // |
 	pipe(in_out);
 	execute_with_redirects(command + last + (last ? 1 : 0), in_out[1], STDOUT_FILENO);
+	close(in_out[1]);
 	execute_with_redirects(command + pos + 1, in_out[0], STDIN_FILENO);
       }else{
 	execute(command + last + (last ? 1 : 0));
