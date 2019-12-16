@@ -9,14 +9,7 @@ int arr_len(char ** command){
   while(command[i++]);
   return i - 1;
 }
-int redirect_stdout(int fd){
-  int d = dup(STDIN_FILENO);
-  dup2(fd, STDIN_FILENO);
-  return d;
-}
-int re_redirect_stdout(int fd){
-  return dup2(STDIN_FILENO, fd);
-}
+
 void execute(char ** command){
   int pid = fork();
   int status;
@@ -63,13 +56,11 @@ void execute_with_redirects(char ** command, int new_fd, int old_fd){
 }
 void execute_redirects(char ** command){
   int num_args = arr_len(command);
-  //printf("Well we made it this far \n");
   int positions[num_args];
   split_redirects(num_args, command, positions);
   int pos = 0;
   int last = 0;
   while(pos < num_args){
-    //printf(">>>>%d %s %d\n", pos, command[pos], positions[pos]);
     if(positions[pos] || pos == num_args - 1){
       int flags = 0;
       int location = pos + 1 < num_args && positions[pos] < 3 ? STDOUT_FILENO : STDIN_FILENO;

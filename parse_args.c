@@ -5,7 +5,6 @@
 #include <signal.h>
 
 int parse_multiple(char *line, char **args){
-  //Fix this for ";"
   int parses = 0;
   int len = strlen(line);
   int p = 0;
@@ -28,7 +27,6 @@ int parse_multiple(char *line, char **args){
   return parses;
 }
 void parse(char *line, char **args){
-   //Returns a parsed string of a command, removes multiple spaces and preserves quotes as strings
   if(line == NULL){
     return;
   }

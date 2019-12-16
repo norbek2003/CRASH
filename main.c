@@ -7,9 +7,16 @@
 #include <fcntl.h>
 #include "execute.h"
 #include "parse_args.h"
-
+/**
+ * A function that does nothing to catch C-c
+ *  
+ * @param n The signal
+ */
 void intHandler(int n){
 }
+/**
+ * A function that prints the shell logo and name in red.
+ */
 void print_header(){
   printf("\033[1;31m");
   printf("The Cool and Really Awesome Shell! (CRASH)\n");  
