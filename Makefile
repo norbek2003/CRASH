@@ -8,14 +8,14 @@ ifdef B
 else
 
 endif
-all: main.o parse_args.o
-	$(CC) -o my_shell main.o parse_args.o
-main.o: main.c headers.h
+all: main.o parse_args.o execute.o
+	$(CC) -o my_shell main.o parse_args.o execute.o
+main.o: main.c parse_args.h execute.h
 	$(CC) -c main.c
-parse_args.o: parse_args.c headers.h
+parse_args.o: parse_args.c 
 	$(CC) -c parse_args.c
-#linked_list.o: linked_list.c linked_list.h
-#	$(CC) -c linked_list.c
+execute.o: execute.c
+	$(CC) -c execute.c
 clean:
 	rm -f *.o
 	rm -f *~
