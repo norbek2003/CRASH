@@ -33,7 +33,7 @@ void print_header(){
   printf("\033[0m");
 }
 int main(){
-  //signal(SIGINT, intHandler);
+  signal(SIGINT, intHandler);
   char * home_dir = getenv("HOME");
   int HOME_LEN = strlen(home_dir);
   print_header();
