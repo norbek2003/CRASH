@@ -9,7 +9,7 @@ else
 
 endif
 all: main.o parse_args.o execute.o
-	$(CC) -o my_shell main.o parse_args.o execute.o
+	$(CC) -o crash main.o parse_args.o execute.o
 main.o: main.c parse_args.h execute.h
 	$(CC) -c main.c
 parse_args.o: parse_args.c 
@@ -20,12 +20,12 @@ clean:
 	rm -f *.o
 	rm -f *~
 run:
-	./my_shell
+	./crash
 debug:
 	make clean
 	make DEBUG=true
-	gdb -ex "set follow-fork-mode child" $(BREAKPOINT) my_shell
+	gdb -ex "set follow-fork-mode child" $(BREAKPOINT) crash
 mem_check:
 	make clean
 	make
-	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./my_shell
+	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./crash
