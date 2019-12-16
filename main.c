@@ -61,6 +61,7 @@ int main(){
       parse(commands[i], argv);
       if(!argv[0]){
       }else if(!strcmp(argv[0], "exit")){
+	free(buffer);
 	exit(0);
       }else if (!strcmp(argv[0], "cd")){
 	if(argv[1]){
